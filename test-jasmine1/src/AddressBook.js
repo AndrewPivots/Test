@@ -1,5 +1,5 @@
 function AddressBook() {
-  let this.contacts = [];
+  this.contacts = [];
   // for async
   // this.initialComplete = false;
   //

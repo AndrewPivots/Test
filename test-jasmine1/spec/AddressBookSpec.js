@@ -1,9 +1,9 @@
 describe('AddressBook', function() {
 
   var addressBook,
-    contact,
+    contact;
 
-  beforeEach(function() {
+  beforeEach(function(){
     addressBook = new AddressBook();
     contact = new Contact();
   });
