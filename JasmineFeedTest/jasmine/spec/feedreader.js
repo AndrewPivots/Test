@@ -33,16 +33,13 @@ $(function() {
          */
 
          it('have urls', function(){
-           let badUrls = 0;
+           let urlLengths = 0;
            let i = 0;
            allFeeds.forEach(function(){
-             let url = allFeeds[i].url;
-             if(!url || url.length < 4){ //improve: not bullet proof
-               badUrls++
-             }
+             urlLengths += allFeeds[i].url.length;
              i++;
            });//forEach
-           expect(badUrls).toBe(0); //improve: the error could be clearer
+           expect(urlLengths).not.toBe(0); //improve: the error could be clearer
            });
 
 
@@ -52,16 +49,13 @@ $(function() {
          */
 
          it('has names', function(){
-           let badNames = 0;
-           let i = 0;
+           let nameLengths = 0;
+           let l = 0;
            allFeeds.forEach(function(){
-             let name = allFeeds[i].name;
-             if(!name || name.length < 4){ //improve: not bullet proof
-               badNames++
-             }
-             i++;
+             nameLengths += allFeeds[l].name.length;
+             l++;
            });//forEach
-           expect(badNames).toBe(0); //improve: the error could be clearer
+           expect(nameLengths).not.toBe(0); //improve: the error could be clearer
            });
 
     });
@@ -70,9 +64,8 @@ $(function() {
 
     describe('The menu', function(){
 
-      const body = document.getElementsByTagName('body');
-      const menuB = document.getElementsByClassName('menu-icon-link');
-      const menuE = document.getElementsByClassName('slide-menu');
+      const body = document.querySelector('body');
+      const menuB = document.querySelector('.menu-icon-link');
 
         /* TODO: Write a test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
@@ -81,7 +74,7 @@ $(function() {
          */
 
          it('is hidden by default', function(){
-           expect(body[0].className).toBe('menu-hidden'); //improve: to check actual menu css
+           expect(body.classList.contains('menu-hidden')).toBe(true); //improve: to check actual menu css
          });
 
          /* TODO: Write a test that ensures the menu changes
@@ -95,18 +88,9 @@ $(function() {
           //improve: does not check actual css or visual. should figure that out.
 
         it('does the menu appear and disappear on clicks', function(){
-          displayErrors = 0;
-          menuB[0].click();
-          let bodyC = body[0].className;
-          if(bodyC == "menu-hidden"){ //improve: not handle other classes well
-            displayErrors++;
-          }
-          menuB[0].click();
-          bodyC = body[0].className;
-          if(!bodyC == "menu-hidden"){ //improve: not handle other classes well
-            displayErrors++;
-          }
-          expect(displayErrors).toBe(0);
+          menuB.click();
+          expect(body.classList.contains('menu-hidden')).toBe(false);
+          menuB.click();
         });
 
     }); // the menu
@@ -130,8 +114,8 @@ $(function() {
              });
            });
            it('has at least one', function(){
-             let feed = document.getElementsByClassName('feed');
-             expect(feed[0].childElementCount).not.toBe(0);
+             let firstEntry = document.querySelector('.entry'); // reviewer told me to use ('.feed.entry') which didn't work. maybe I used it wrong.
+             expect(firstEntry).not.toEqual(null);
            });
          });
 
@@ -166,16 +150,14 @@ $(function() {
              loadFeed(2, function(){
                feed = document.getElementsByClassName('feed');
                item1 = feed[0].innerHTML;
-             });
-             loadFeed(0, function(){
-               feed = document.getElementsByClassName('feed');
-               item2 = feed[0].innerHTML;
-               done();
+               loadFeed(0, function(){ // nesting concept from Karine L in knowledge center. project reviewer difficult to understand. i need to understand callbacks and async more.
+                 feed = document.getElementsByClassName('feed');
+                 item2 = feed[0].innerHTML;
+                 done();
+               });
              });
            });
            it('change content', function(){
-                            console.log(item1);
-                            console.log(item2);
              expect(item1 === item2).not.toBe(true);
            });
          });
