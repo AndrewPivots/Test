@@ -33,13 +33,11 @@ $(function() {
          */
 
          it('have urls', function(){
-           let urlLengths = 0;
            let i = 0;
            allFeeds.forEach(function(){
-             urlLengths += allFeeds[i].url.length;
+              expect(allFeeds[i].url.length).not.toBe(0);
              i++;
            });//forEach
-           expect(urlLengths).not.toBe(0); //improve: the error could be clearer
            });
 
 
@@ -49,13 +47,11 @@ $(function() {
          */
 
          it('has names', function(){
-           let nameLengths = 0;
            let l = 0;
            allFeeds.forEach(function(){
-             nameLengths += allFeeds[l].name.length;
+             expect(allFeeds[l].name.length).not.toBe(0);
              l++;
            });//forEach
-           expect(nameLengths).not.toBe(0); //improve: the error could be clearer
            });
 
     });
@@ -91,6 +87,7 @@ $(function() {
           menuB.click();
           expect(body.classList.contains('menu-hidden')).toBe(false);
           menuB.click();
+          expect(body.classList.contains('menu-hidden')).toBe(true);
         });
 
     }); // the menu
@@ -114,8 +111,8 @@ $(function() {
              });
            });
            it('has at least one', function(){
-             let firstEntry = document.querySelector('.entry'); // reviewer told me to use ('.feed.entry') which didn't work. maybe I used it wrong.
-             expect(firstEntry).not.toEqual(null);
+             let entries = $('.feed .entry'); // reviewer told me to use ('.feed.entry') which didn't work. maybe I used it wrong.
+             expect(entries).not.toEqual(null);
            });
          });
 

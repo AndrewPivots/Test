@@ -13,6 +13,7 @@ This project is to test my ability to add Jasmine js tests to an existing Udacit
 
 ## Projects Feedback
 1. FEB 4: My project reviewer thinks I over complicated most of my tests. This may have been partially because I wanted to stick to the methods I was most confident in at the time. I used a lot of loops to check more nodes which is a more thorough way of doing things but likely over-complicated it. But I did like implementing his method and techniques to make things simpler.
+2. FEB 5: Learned that you can put expect expressions within loops and even have multiple. Added missed expect statement. Fixed logic error that approved missing urls and names. Also, learned that these kind of test tools are for development branches and not for production so my UX concerns are not valid.
 
 ## Sources
 1. CALLBACKS & NESTING: Karine L's thread in the Knowledge Center helped me understand nesting asynchronous functions with the callback. https://knowledge.udacity.com/questions/14179
