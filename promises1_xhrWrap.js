@@ -9,6 +9,8 @@ Instructions:
 // Inline configuration for jshint below. Prevents `gulp jshint` from failing with quiz starter code.
 /* jshint unused: false */
 
+// console.log('hi');
+
 (function(document) {
   'use strict';
 
@@ -36,23 +38,32 @@ Instructions:
     /*
     This code needs to get wrapped in a Promise!
      */
-    var req = new XMLHttpRequest();
-    req.open('GET', url);
-    req.onload = function() {
-      if (req.status === 200) {
-        // It worked!
-        // You'll want to resolve with the data from req.response
-      } else {
+
+    return new Promise(function(resolve, reject) {
+
+      var req = new XMLHttpRequest();
+      req.open('GET', url);
+      req.onload = function() {
+        if (req.status === 200) {
+          // It worked!
+          // You'll want to resolve with the data from req.response
+
+          resolve(req.response);
+        } else {
+          // It failed :(
+          // Be nice and reject with req.statusText
+          reject(new Error(req.statusText)); // AA forgot to use Error constructor https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/reject
+        }
+      };
+      req.onerror = function() {
         // It failed :(
-        // Be nice and reject with req.statusText
-      }
-    };
-    req.onerror = function() {
-      // It failed :(
-      // Pass a 'Network Error' to reject
-    };
-    req.send();
-  }
+        // Pass a 'Network Error' to reject
+        reject(new Error('Network Error'));
+      };
+      req.send();
+      console.log(req);
+    }); // promise
+    }; // get
 
   window.addEventListener('WebComponentsReady', function() {
     home = document.querySelector('section[data-route="home"]');
@@ -61,6 +72,13 @@ Instructions:
     You'll need to add a .then and a .catch. Pass the response to addSearchHeader on resolve or
     pass 'unknown' to addSearchHeader if it rejects.
      */
-    // get('../data/earth-like-results.json')
+    get('../data/earth-like-results.json')
+    .then(function(response){
+      addSearchHeader(response);
+    })
+    .catch(function(){
+      addSearchHeader('unknown');
+    });
+
   });
 })(document);
