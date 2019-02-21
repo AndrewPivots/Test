@@ -7,6 +7,8 @@ Instructions:
 (4) Handle errors by passing "unknown" to addSearchHeader.
  */
 
+ // console.log('test');
+
 // Inline configuration for jshint below. Prevents `gulp jshint` from failing with quiz starter code.
 /* jshint unused: false */
 
@@ -35,7 +37,21 @@ Instructions:
 
     Your code goes here!
      */
-  }
+     return new Promise(function(resolve, reject){
+       fetch(url, {
+         method: 'get'
+       }).then(function(response){
+         // console.log(response);
+         resolve(response)
+        })
+        .catch(function(err){
+          reject(new Error(err))
+        })
+      });
+
+    }; //get
+
+// get('/hi.jpg');
 
   /**
    * Performs an XHR for a JSON and returns a parsed JSON response.
@@ -48,7 +64,17 @@ Instructions:
 
     Your code goes here!
      */
-  }
+     return new Promise(function(resolve, reject){ // nesting promises tricky
+      get(url).then(function(response){
+        if(response){
+          let resJson = response.json();
+          // console.log(resJson);
+          resolve(resJson)
+        }
+    })
+  })
+
+  } // getJSON
 
   window.addEventListener('WebComponentsReady', function() {
     home = document.querySelector('section[data-route="home"]');
@@ -58,6 +84,11 @@ Instructions:
 
     Your code goes here too!
      */
-    // getJSON('../data/earth-like-results.json')
+    getJSON('../data/earth-like-results.json').then(function(response){
+      // console.log(response);
+      addSearchHeader(response.query)
+    }).catch(function(err){
+      addSearchHeader('unknown')
+    })
   });
 })(document);
