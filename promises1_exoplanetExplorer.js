@@ -37,18 +37,7 @@ Instructions:
 
     Your code goes here!
      */
-     return new Promise(function(resolve, reject){
-       fetch(url, {
-         method: 'get'
-       }).then(function(response){
-         // console.log(response);
-         resolve(response)
-        })
-        .catch(function(err){
-          reject(new Error(err))
-        })
-      });
-
+       return fetch(url);
     }; //get
 
 // get('/hi.jpg');
@@ -64,15 +53,9 @@ Instructions:
 
     Your code goes here!
      */
-     return new Promise(function(resolve, reject){ // nesting promises tricky
-      get(url).then(function(response){
-        if(response){
-          let resJson = response.json();
-          // console.log(resJson);
-          resolve(resJson)
-        }
-    })
-  })
+      return get(url).then(function(response){ // nested returns?
+          return response.json();
+  });
 
   } // getJSON
 
@@ -87,8 +70,13 @@ Instructions:
     getJSON('../data/earth-like-results.json').then(function(response){
       // console.log(response);
       addSearchHeader(response.query)
+      console.log(response);
+      return response.results[0]; // so this returns a value that then gets passed to the next then?
+    }).then(function(url){
+      console.log(url);
     }).catch(function(err){
       addSearchHeader('unknown')
+      console.log(err)
     })
   });
 })(document);
