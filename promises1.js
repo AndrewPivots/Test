@@ -64,6 +64,21 @@ Instructions:
 
     Your code goes here!
      */
-    // getJSON('../data/earth-like-results.json')
+    getJSON('../data/earth-like-results.json')
+    .then(function(planets){
+      addSearchHeader(planets.query);
+      return getJSON(planets.results[0]);  // I cheated to know I needed to use the function twice
+    })
+    .catch(function(err){ // I cheated to know you can bounce between catches and thens
+      addSearchHeader('unknown');
+      console.log(new Error(err)); // his catch statement is is only for the first getJSON search result error
+    })
+    .then(function(planet){ // i do not like the short hand version of this because you can't see the argument that is passed in
+        // console.log(planet);
+        createPlanetThumb(planet);
+    })
+    .catch(function(err){ // he uses e for error
+      console.log(new Error(err));
+    })
   });
 })(document);
