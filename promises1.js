@@ -1,10 +1,10 @@
 /*
 Instructions:
-(1) Get the planet data and add the search header.
-(2) Create the first thumbnail with createPlanetThumb(data)
-(3) Handle errors!
-  (a) Pass 'unknown' to the search header.
-  (b) console.log the error.
+(1) Refactor .forEach below to create a sequence of Promises that always resolves in the same
+    order it was created.
+  (a) Fetch each planet's JSON from the array of URLs in the search results.
+  (b) Call createPlanetThumb on each planet's response data to add it to the page.
+(2) Use developer tools to determine if the planets are being fetched in series or in parallel.
  */
 
 // Inline configuration for jshint below. Prevents `gulp jshint` from failing with quiz starter code.
@@ -36,7 +36,7 @@ Instructions:
   }
 
   /**
-   * XHR wrapped in a promise
+   * XHR wrapped in a promise.
    * @param  {String} url - The URL to fetch.
    * @return {Promise}    - A Promise that resolves when the XHR succeeds and fails otherwise.
    */
@@ -60,25 +60,13 @@ Instructions:
   window.addEventListener('WebComponentsReady', function() {
     home = document.querySelector('section[data-route="home"]');
     /*
-    Uncomment the next line and start here when you're ready to add the first thumbnail!
-
-    Your code goes here!
+    Refactor this code!
      */
     getJSON('../data/earth-like-results.json')
-    .then(function(planets){
-      addSearchHeader(planets.query);
-      return getJSON(planets.results[0]);  // I cheated to know I needed to use the function twice
-    })
-    .catch(function(err){ // I cheated to know you can bounce between catches and thens
-      addSearchHeader('unknown');
-      console.log(new Error(err)); // his catch statement is is only for the first getJSON search result error
-    })
-    .then(function(planet){ // i do not like the short hand version of this because you can't see the argument that is passed in
-        // console.log(planet);
-        createPlanetThumb(planet);
-    })
-    .catch(function(err){ // he uses e for error
-      console.log(new Error(err));
-    })
+    .then(function(response) {
+      response.results.forEach(function(url) {
+        getJSON(url).then(createPlanetThumb);
+      });
+    });
   });
 })(document);
