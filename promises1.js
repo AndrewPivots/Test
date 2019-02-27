@@ -63,10 +63,47 @@ Instructions:
     Refactor this code!
      */
     getJSON('../data/earth-like-results.json')
-    .then(function(response) {
-      response.results.forEach(function(url) {
-        getJSON(url).then(createPlanetThumb);
-      });
-    });
+
+    // .then(function(response) {
+    //   response.results.forEach(function(url) {
+    //     getJSON(url).then(createPlanetThumb);
+    //   });
+    // });
+
+    // This parrellel bit I wrote myself after copying instructors series version below
+    .then(function(response){
+      response.results.forEach(function(url){
+        var sequence = new Promise(function(resolve){
+          resolve(getJSON(url));
+        });
+        sequence.then(createPlanetThumb);
+    })
+  });
+
+    // recreating instructors series answer after failed attempt below
+    // .then(function(response){
+    //   var sequence = Promise.resolve(); // new promise (construstor) in series
+    //   response.results.forEach(function(url){
+    //     sequence = sequence.then(function(){ // redefines and run promise with new contents
+    //       return getJSON(url);
+    //     }).then(createPlanetThumb);
+    //   });
+    // });
+
+    // my failed answer to the quiz
+    // .then(function(response) {
+    //   let count = 0;
+    //   let total = response.results.length;
+    //   response.results.forEach(function(url) {
+    //     getJSON(url).then(function(){
+    //       createPlanetThumb();
+    //       if(count <= total){
+    //         count++
+    //         return getJSON(url).then(createPlanetThumb);
+    //       }
+    //     });
+    //   });
+    // });
+
   });
 })(document);
