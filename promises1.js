@@ -1,10 +1,8 @@
 /*
 Instructions:
-(1) Refactor .forEach below to create a sequence of Promises that always resolves in the same
-    order it was created.
-  (a) Fetch each planet's JSON from the array of URLs in the search results.
-  (b) Call createPlanetThumb on each planet's response data to add it to the page.
-(2) Use developer tools to determine if the planets are being fetched in series or in parallel.
+(1) Use .map to fetch all the planets in parallel.
+  (a) Call .map on an array and pass it a function.
+  (b) .map will execute the function against each element in the array immediately.
  */
 
 // Inline configuration for jshint below. Prevents `gulp jshint` from failing with quiz starter code.
@@ -36,14 +34,12 @@ Instructions:
   }
 
   /**
-   * XHR wrapped in a promise.
+   * XHR wrapped in a promise
    * @param  {String} url - The URL to fetch.
    * @return {Promise}    - A Promise that resolves when the XHR succeeds and fails otherwise.
    */
   function get(url) {
-    return fetch(url, {
-      method: 'get'
-    });
+    return fetch(url);
   }
 
   /**
@@ -60,50 +56,9 @@ Instructions:
   window.addEventListener('WebComponentsReady', function() {
     home = document.querySelector('section[data-route="home"]');
     /*
-    Refactor this code!
+    Your code goes here! Uncomment the next line when you're ready to start!
      */
-    getJSON('../data/earth-like-results.json')
 
-    // .then(function(response) {
-    //   response.results.forEach(function(url) {
-    //     getJSON(url).then(createPlanetThumb);
-    //   });
-    // });
-
-    // This parrellel bit I wrote myself after copying instructors series version below
-    .then(function(response){
-      response.results.forEach(function(url){
-        var sequence = new Promise(function(resolve){
-          resolve(getJSON(url));
-        });
-        sequence.then(createPlanetThumb);
-    })
-  });
-
-    // recreating instructors series answer after failed attempt below
-    // .then(function(response){
-    //   var sequence = Promise.resolve(); // new promise (construstor) in series
-    //   response.results.forEach(function(url){
-    //     sequence = sequence.then(function(){ // redefines and run promise with new contents
-    //       return getJSON(url);
-    //     }).then(createPlanetThumb);
-    //   });
-    // });
-
-    // my failed answer to the quiz
-    // .then(function(response) {
-    //   let count = 0;
-    //   let total = response.results.length;
-    //   response.results.forEach(function(url) {
-    //     getJSON(url).then(function(){
-    //       createPlanetThumb();
-    //       if(count <= total){
-    //         count++
-    //         return getJSON(url).then(createPlanetThumb);
-    //       }
-    //     });
-    //   });
-    // });
-
+    // getJSON('../data/earth-like-results.json')
   });
 })(document);
