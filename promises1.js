@@ -59,6 +59,22 @@ Instructions:
     Your code goes here! Uncomment the next line when you're ready to start!
      */
 
-    // getJSON('../data/earth-like-results.json')
+    getJSON('../data/earth-like-results.json') // returns json object with planet urls
+    .then(function(planets){
+      return planets.results;
+    })
+    .then(function(urls){
+      let i = 0
+      urls.map(function(){
+        new Promise(function(resolve){
+          resolve(getJSON(urls[i]))
+        })
+        .then(function(planet){
+          createPlanetThumb(planet)
+        })
+        i++
+      })
+    })
+
   });
 })(document);
