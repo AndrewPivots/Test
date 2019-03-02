@@ -60,13 +60,32 @@ Hint: you'll probably still need to use .map.
     Refactor this code with Promise.all!
      */
     getJSON('../data/earth-like-results.json')
-    .then(function(response) {
+    .then(function(response){
 
       addSearchHeader(response.query);
 
-      response.results.map(function(url) {
-        getJSON(url).then(createPlanetThumb);
-      });
-    });
+      let promises = response.results.map(function(url){
+        return getJSON(url);
+      })
+      Promise.all(promises).then(function(values){
+        values.forEach(createPlanetThumb);
+      })
+    })
+
+    // getJSON('../data/earth-like-results.json')
+    // .then(function(response){
+    //
+    //   addSearchHeader(response.query);
+    //
+    //   return response.results.map(function(url){
+    //     getJSON(url).then(createPlanetThumb);
+    //   })
+    // })
+    // .then(function(promises){
+    //   Promise.all(promises).then(function(result){
+    //     console.log("done!"); // I was trying to do createPlanetThumb here but couldn't figure it out.
+    //   })
+    // })
+
   });
 })(document);
