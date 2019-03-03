@@ -31,3 +31,20 @@ This repository uses [leafletjs](https://leafletjs.com/) with [Mapbox](https://w
 ### Note about ES6
 
 Most of the code in this project has been written to the ES6 JavaScript specification for compatibility with modern web browsers and future-proofing JavaScript code. As much as possible, try to maintain use of ES6 in any additional JavaScript you write.
+
+## How To Set Up
+
+1. Kick up a server like MAMP
+2. Put directory on the server.
+3. Change port, directory, and img path settings in dbhelper.js
+
+## References
+
+1. DOCTYPE: Looks like html5 is already declared so I'm not sure what else they want me to do here other than using html4 which they don't specify. Maybe they want me in strict mode? https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Introduction_to_HTML5
+2. CHARSET: Maybe what they meant by doctype was character encoding set because I was getting a browser error for it. https://developer.mozilla.org/en-US/docs/Glossary/character_encoding
+3. VIEWPORT: I need to review this stuff so I can remember it. https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag
+
+## Fix
+
+1. [DONE] URL ID: Restaurant.html needs some kind of id in the url to work. I'm sure I'll figure that out soon.
+2. [DONE] DATA LOAD: json data file wasn't loading. Strange network errors in consoles. Turned on a server. Fixed port. Then fixed directory path on server.
