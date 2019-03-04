@@ -149,8 +149,13 @@ class DBHelper {
   /**
    * Restaurant image URL.
    */
+
   static imageUrlForRestaurant(restaurant) {
-    return (`/udacity/project7/img/${restaurant.photograph}`);
+    if (window.screen.width < 400) {
+      return (`/udacity/project7/img/width250/${restaurant.photograph}`);
+    } else {
+      return (`/udacity/project7/img/${restaurant.photograph}`);
+    }
   }
 
   /**
