@@ -86,6 +86,15 @@ initMap = () => {
     id: 'mapbox.streets'
   }).addTo(newMap);
 
+  // grabbing all links in sources box and removing from tabindex
+  const sources = document.getElementsByClassName('leaflet-control-attribution');
+  const links = sources[0].children;
+  let c = 0;
+  while(c < links.length){
+    links[c].setAttribute('tabindex', '-1');
+    c++
+  }
+
   updateRestaurants();
 }
 /* window.initMap = () => {
