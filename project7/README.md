@@ -44,6 +44,8 @@ Most of the code in this project has been written to the ES6 JavaScript specific
 1. [DONE] URL ID: Restaurant.html needs some kind of id in the url to work. I'm sure I'll figure that out soon.
 2. [DONE] DATA LOAD: json data file wasn't loading. Strange network errors in consoles. Turned on a server. Fixed port. Then fixed directory path on server.
 3. IMAGES: Figure out better way for responsive images other than small and big based on screen width. It would be awesome to base it purely on device and network speed somehow since that's what matters.
+4. LINKS: Bring back some kind of "view details" for restaurant list buttons. Currently redundant.
+5. OPTION SELECT: I don't like how screen readers don't announce the options when navigating but mdn makes me think I'm possibly not understanding..."The <select> element with descendant <option> elements handles all the needed interactions natively." https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/listbox_role
 
 ## References
 
@@ -53,3 +55,4 @@ Most of the code in this project has been written to the ES6 JavaScript specific
 4. MEDIA QUERIES: https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries
 5. FLEXBOX: https://www.w3.org/TR/css-flexbox-1/
 6. SCREEN WIDTH: https://developer.mozilla.org/en-US/docs/Web/API/Screen/width
+7. LINK TEXT: quote, "click here," "more," "click for details," and so on are ambiguous https://webaim.org/techniques/hypertext/

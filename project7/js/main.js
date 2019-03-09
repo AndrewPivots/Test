@@ -86,6 +86,9 @@ initMap = () => {
     id: 'mapbox.streets'
   }).addTo(newMap);
 
+  // removing map container from tabindex for screenreaders
+  document.querySelector("#map").setAttribute('tabindex', '-1');
+
   // grabbing all links in sources box and removing from tabindex
   const sources = document.getElementsByClassName('leaflet-control-attribution');
   const links = sources[0].children;
@@ -185,7 +188,7 @@ createRestaurantHTML = (restaurant) => {
   li.append(address);
 
   const more = document.createElement('a');
-  more.innerHTML = 'View Details';
+  more.innerHTML = restaurant.name;
   more.href = DBHelper.urlForRestaurant(restaurant);
   li.append(more)
 

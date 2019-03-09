@@ -24,13 +24,26 @@ initMap = () => {
       L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.jpg70?access_token={mapboxToken}', {
         mapboxToken: 'pk.eyJ1IjoiYW5kcmV3cGl2b3RzIiwiYSI6ImNqc3M4OTY4djBpMmU0NGs0ODM4cXg4bjEifQ.gZoI8a32knOink4vIPFGDA',
         maxZoom: 18,
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-          '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-          'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/" tabindex="-1">OpenStreetMap</a> contributors, ' +
+          '<a href="https://creativecommons.org/licenses/by-sa/2.0/" tabindex="-1">CC-BY-SA</a>, ' +
+          'Imagery © <a href="https://www.mapbox.com/" tabindex="-1">Mapbox</a>',
         id: 'mapbox.streets'
       }).addTo(newMap);
+
       fillBreadcrumb();
       DBHelper.mapMarkerForRestaurant(self.restaurant, self.newMap);
+
+      // removing map container from tabindex for screenreaders
+      document.querySelector("#map").setAttribute('tabindex', '-1');
+
+      // grabbing all links in sources box and removing from tabindex
+      const sources = document.getElementsByClassName('leaflet-control-attribution');
+      const links = sources[0].children;
+      let c = 0;
+      while(c < links.length){
+        links[c].setAttribute('tabindex', '-1');
+        c++
+      }
     }
   });
 }
