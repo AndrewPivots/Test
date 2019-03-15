@@ -9,7 +9,7 @@ class DBHelper {
    */
   static get DATABASE_URL() {
     const port = 8888; // Change this to your server port
-    return `http://localhost:${port}/udacity/project7/data/restaurants.json`;
+    return `http://localhost:${port}/data/restaurants.json`;
   }
 
   /**
@@ -152,9 +152,9 @@ class DBHelper {
 
   static imageUrlForRestaurant(restaurant) {
     if (window.screen.width < 400) {
-      return (`/udacity/project7/img/width250/${restaurant.photograph}`);
+      return (`/img/width250/${restaurant.photograph}`);
     } else {
-      return (`/udacity/project7/img/${restaurant.photograph}`);
+      return (`/img/${restaurant.photograph}`);
     }
   }
 
