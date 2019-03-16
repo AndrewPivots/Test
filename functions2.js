@@ -15,10 +15,17 @@ class Vehicle {
 }
 
 // your code goes here
+class Bicycle extends Vehicle {
+    constructor(color, wheels = 2, horn = 'honk honk'){ // color feels redundant if base class values default is desired.
+        super(color, wheels, horn); // learn more about super
+        this.wheels = wheels;
+        this.horn = horn;  
+    }
+}
 
-/* tests
+
 const myVehicle = new Vehicle();
 myVehicle.honkHorn(); // beep beep
 const myBike = new Bicycle();
 myBike.honkHorn(); // honk honk
-*/
+
