@@ -1,5 +1,13 @@
 // You know you need to practice symbols when you don't undertstand much of the first paragraph on mdn haha: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol
 
+const bowl = {
+  [Symbol('apple')]: { color: 'red', weight: 136.078 },
+  [Symbol('banana')]: { color: 'yellow', weight: 183.15 },
+  [Symbol('orange')]: { color: 'orange', weight: 170.097 },
+  [Symbol('banana')]: { color: 'yellow', weight: 176.845 }
+};
+// Symbols let you have 2 bananas in the bowl
+
 const num1 = 5;
 const num2 = 5;
 num1 === num2 // true
@@ -13,7 +21,7 @@ const obj2 = new Object();
 obj1 === obj2 // false
 
 /*
-For 3-13
+10 Lines Above
 Questions
 - Is it really all about values?
 - How are symbol values always different?
