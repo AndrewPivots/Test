@@ -2,6 +2,7 @@
 
 const gulp = require("gulp");
 
-gulp.task("default", function(){
-  console.log('Hello, gulp!');
+gulp.task("default", function(done){
+  console.log('Running gulp!');
+  done();
 });
